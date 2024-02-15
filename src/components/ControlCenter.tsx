@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons'
 import TrackPlayer, { PlaybackState, State, usePlaybackState } from 'react-native-track-player'
 import { getPlaybackState } from 'react-native-track-player/lib/trackPlayer'
 
-const controlCenter = () => {
+const ControlCenter = () => {
 
     const playbackState = usePlaybackState()
 
@@ -18,14 +18,12 @@ const controlCenter = () => {
 
     const togglePlayback = async (playback: State | undefined) => {
         const currentTrack = await TrackPlayer.getActiveTrackIndex()
-        if(currentTrack !== undefined) {
-            if(playback !== undefined) {
-                if(playback === State.Paused || playback === State.Ready) {
-                    await TrackPlayer.play()
-                } else {
-                    await TrackPlayer.pause()
-                }   
-            }
+        if(currentTrack !== null) {
+            if(playback === State.Paused || playback === State.Ready) {
+                await TrackPlayer.play()
+            } else {
+                await TrackPlayer.pause()
+            }   
         }
     }
 
@@ -46,6 +44,9 @@ const controlCenter = () => {
 
 const styles = StyleSheet.create({
     container: {
+        flexDirection : 'row',
+        alignItems : 'center',
+        justifyContent : 'space-between',
         margin : 40
     },
     icon : {
@@ -53,4 +54,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default controlCenter
+export default ControlCenter
